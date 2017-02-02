@@ -13,7 +13,7 @@ public class SKUCreationRequestService {
 	@Autowired
 	SKUCreationRequestRepository repo;
 
-	public SKUCreationRequest create(SKUCreationRequest skuCrtReq) {
+	public SKUCreationRequest save(SKUCreationRequest skuCrtReq) {
 		return this.repo.save(skuCrtReq);
 	}
 

@@ -61,10 +61,12 @@ public class SkuControllerl {
 			return "/sku/create";
 		}
 		SKUCreationRequest req = this.creationRequest.findOne(id);
+		req.setCreated(true);
 		sku.setName(req.getName());
 		sku.setDesribtion(req.getDesribtion());
 		sku.setQuantitiy(req.getQuantitiy());
 		this.skuService.save(sku);
+		this.creationRequest.save(req);
 		return "redirect:/sku/SKUs";
 	}
 

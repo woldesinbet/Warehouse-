@@ -8,22 +8,60 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Insert title here</title>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"> </script>
+<script>
+	function ship(event){
+		var reqId = $(event.target).data('id');
+		if (confirm("Are you sure you want to ship this request? ")) {
+			var data = {
+				'id' : reqId,
+			};
+			$
+					.ajax({
+						async : false,
+						type : "POST",
+						url : "/shipment/ship",
+						data : data,
+						timeout :7000,
+						success : function(
+								data) {
+							alert("Succesfully Shipped request: " + $(event.target).data("id"));
+							$(event.target).closest('tr').remove();		   							
+						},
+						error : function(
+								xhr,
+								textStatus,
+								errorThrown) {
+							alert(textStatus);
+						}
+					});
+
+		}
+	return false;	
+	}
+	</script>
 </head>
 
 <body>
 
-	<h2>Stock Keeping Unit Request detail:</h2>
-	<br /> Name :${sku.name}
-	<br /> Price :${sku.price}
-	<br /> Quantitiy :${sku.quantitiy}
-	<br /> Dimensions :${sku.dimensions}
-	<br /> Weight :${sku.weight}
-	<br /> Delivery Time :${sku.deliveryTime}
-	<br /> Volume Mark :${sku.volumeMark}
-	<br /> Max Stack Floors :${sku.maxStackFloors}
-	<br /> Max Stack Floors :${sku.desribtion}
-	<br /> Location Number :${sku.location.locationNumber}	
-	<br />
-
+	<table id="tbRequests" border="1">
+		<thead>
+			<tr>
+				<td>ID:</td>
+				<td>Destination Address Line</td>
+				<td></td>
+			</tr>
+		</thead>
+		<c:forEach items="${list}" var="request">
+			<tr>
+				<td>${request.id}</td>
+				<td>${request.destination}</td>
+				<td>${request.id}</td>
+				<td><button data-id="${request.id}"
+						onclick=" return ship(event,${request.id})" class="ship">Ship</button></td>
+			</tr>
+		</c:forEach>
+	</table>
 </body>
 </html>

@@ -11,33 +11,35 @@
 </head>
 <body>
 <body>
-	<h2>List of SKUs in the stock:</h2>
-	<form:form modelAttribute="location" method="post">
+	<h2>List of Items to be Picked:</h2>
 
-		<table border="1">
-			<thead>
-				<tr>
-					<td>ID:</td>
-					<td>Name</td>
-					<td>Price</td>
-					<td>Quantitiy</td>
-					<td>Desribtion</td>
-					<td></td>
-				</tr>
-			</thead>
-			<c:forEach items="${skus}" var="sku">
-				<tr>
-					<td>${sku.id}</td>
-					<td>${sku.name}</td>
-					<td>${sku.price}</td>
-					<td>${sku.quantitiy}</td>
-					<td>${sku.desribtion}</td>
-					<td><a href="<spring:url value="/sku/create/${sku.id}" /> "> </span>
-						Create SKU
-					</a></td>
-				</tr>
-			</c:forEach>
-		</table>
-	</form:form>
+	<br /> ID :${request.id}
+	<br /> Destination :${request.destination}
+	<br />Lits Of Items To Be Peaked:
+	<table border="1">
+		<thead>
+			<tr>
+				<td>SKU ID:</td>
+				<td>SKU Name</td>
+				<td>SKU Location</td>
+				<td>Quantitiy</td>
+			</tr>
+		</thead>
+		<c:forEach items="${request.items}" var="item">
+			<tr>
+				<td>${item.sku.id}<a
+					href="<spring:url value="/sku/details/${item.sku.id}" /> "> </span>
+						(SKU Details)
+				</a></td>
+				<td>${item.sku.name}</td>
+				<td>${item.sku.location.locationNumber}</td>
+				<td>${item.quantity}</td>
+			</tr>
+		</c:forEach>
+	</table>
+	<form name="submitForm" method="POST" action="/shipment/pick/">
+		<input type="hidden" name="requestId" value="${request.id}"> 
+		<A HREF="javascript:document.submitForm.submit()">Pick</A>
+	</form>
 </body>
 </html>

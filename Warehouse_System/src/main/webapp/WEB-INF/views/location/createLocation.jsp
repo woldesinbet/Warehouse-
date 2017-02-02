@@ -32,7 +32,7 @@
 				<td><form:errors path="palletRack" cssStyle="color:red;" /></td>
 			</tr>
 			<tr>
-				<td>PalletRack:</td>
+				<td>floorStack:</td>
 				<td><form:textarea id="floorStack" path="floorStack" /></td>
 				<td><form:errors path="floorStack" cssStyle="color:red;" /></td>
 			</tr>

@@ -149,11 +149,11 @@ public class SKU {
 		this.quantitiy = this.quantitiy + quantity;
 	}
 
-	public void decreaseQuantitiy() {
+	public void decreaseQuantitiy(int quantity) {
 		if (quantitiy <= 0) {
 			throw new RuntimeException("Quantity should be greater than 0.");
 		}
-		this.quantitiy = this.quantitiy - 1;
+		this.quantitiy = this.quantitiy - quantity;
 	}
 
 }

@@ -18,7 +18,8 @@ public class ShippingRequestService {
 	}
 
 	public List<ShippingRequest> peakRequestsList() {
-		return this.peakRequestsList();
+		System.out.println(rep.peakRequestsList().size());
+		return this.rep.peakRequestsList();
 	}
 
 	public ShippingRequest findOne(Long id) {

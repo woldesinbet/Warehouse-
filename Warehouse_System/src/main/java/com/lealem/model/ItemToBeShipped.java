@@ -1,5 +1,6 @@
 package com.lealem.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
@@ -9,8 +10,9 @@ public class ItemToBeShipped {
 	@Id
 	private Long id;
 	private int quantity;
-	@ManyToOne
+	@ManyToOne(cascade = { CascadeType.MERGE, CascadeType.REFRESH })
 	private SKU sku;
+
 	@ManyToOne
 	private ShippingRequest shippingRequest;
 
@@ -37,5 +39,6 @@ public class ItemToBeShipped {
 	public void setShippingRequest(ShippingRequest shippingRequest) {
 		this.shippingRequest = shippingRequest;
 	}
+
 
 }

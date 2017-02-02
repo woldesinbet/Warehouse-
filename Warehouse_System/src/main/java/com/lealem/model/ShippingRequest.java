@@ -1,5 +1,7 @@
 package com.lealem.model;
 
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.forwardedUrl;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,11 +11,9 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 import org.hibernate.validator.constraints.NotEmpty;
-
 
 @Entity
 public class ShippingRequest {
@@ -47,8 +47,22 @@ public class ShippingRequest {
 		return status;
 	}
 
-	public void setStatus(ShipmentStatus status) {
-		this.status = status;
+	public void ship() {
+		if(this.status == ShipmentStatus.NEW || this.status == ShipmentStatus.SHIPPED){
+			throw new RuntimeException("Item is not ready to be shipped or already shipped.");
+		}
+		this.status = ShipmentStatus.SHIPPED;
+	}
+
+	public void pick() {
+		if(this.status == ShipmentStatus.SHIPPED || this.status == ShipmentStatus.PICKED){
+			throw new RuntimeException("Item is not ready to be shipped or already shipped.");
+		}		
+		for(ItemToBeShipped item: items){
+			SKU sku = item.getSku();
+			sku.decreaseQuantitiy(item.getQuantity());
+		}
+		this.status = ShipmentStatus.PICKED;
 	}
 
 	public String getDestination() {

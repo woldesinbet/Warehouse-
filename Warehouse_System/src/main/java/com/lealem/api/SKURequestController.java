@@ -20,7 +20,7 @@ public class SKURequestController {
 	
 	@PutMapping("/skuCreationRequest")
 	public SKUCreationRequest createSKUCreationRequest(@Valid SKUCreationRequest skuRequest) {
-		return this.skuService.create(skuRequest);
+		return this.skuService.save(skuRequest);
 	}
 
 }
