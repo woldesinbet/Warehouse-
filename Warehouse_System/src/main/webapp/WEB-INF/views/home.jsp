@@ -13,10 +13,12 @@
 </head>
 <body>
 <body>
-	<h2>Well Come to Home Page</h2>
+	<h2>Well Come </h2>
 	<ul>
 		<sec:authorize access="hasRole('ROLE_STORE_MANAGER')">
+			<h1>STORE MANAGER</h1>
 			<li><a href="<spring:url value="/sku/SKUCreationRequests" /> ">
+		
 					</span> SKU Creation Requests List
 			</a></li>
 			<li><a href="<spring:url value="/sku/SKUs" /> "> </span> List of
@@ -24,6 +26,7 @@
 			</a></li>
 		</sec:authorize>
 		<sec:authorize access="hasRole('ROLE_WAREHOUSE_MANAGER')">
+		<h1>WAREHOUSE MANAGER</h1>
 			<li><a href="<spring:url value="/location/createLocation" /> ">
 					</span> Add Location
 			</a></li>
@@ -32,15 +35,18 @@
 			</a></li>
 		</sec:authorize>
 		<sec:authorize access="hasRole('ROLE_ORDER_PICKER')">
+		<h1>ORDER PICKER</h1>
 			<li><a href="<spring:url value="/shipment/peakRequestsList" /> ">
 					</span> List of Shipment Requests To be picked
 			</a></li>
 		</sec:authorize>
 		<sec:authorize access="hasRole('ROLE_CLERK')">
+		<h1>SHIPPING CLERK</h1>
 			<li><a href="<spring:url value="/shipment/shipRequestsList" /> ">
 					</span> List of Shipment Requests To be shipped
 			</a></li>
 		</sec:authorize>
+		<li><a href="<spring:url value="/logout" />">Logout </a></li>
 
 	</ul>
 </body>

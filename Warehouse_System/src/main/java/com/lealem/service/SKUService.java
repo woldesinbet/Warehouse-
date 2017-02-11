@@ -2,12 +2,14 @@ package com.lealem.service;
 
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.lealem.model.SKU;
 import com.lealem.repository.SKURepository;
-
+@Transactional
 @Service
 public class SKUService {
 	@Autowired
@@ -25,4 +27,7 @@ public class SKUService {
 		return this.skuRepository.findOne(id);
 	}
 
+	public SKU findByProductId(Long productId) {
+		return this.skuRepository.findByProductId(productId);
+	}
 }

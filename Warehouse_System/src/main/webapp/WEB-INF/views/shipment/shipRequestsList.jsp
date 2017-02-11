@@ -9,38 +9,36 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Insert title here</title>
 <script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"> </script>
+	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js">
+	
+</script>
 <script>
-	function ship(event){
+	function ship(event) {
 		var reqId = $(event.target).data('id');
 		if (confirm("Are you sure you want to ship this request? ")) {
 			var data = {
 				'id' : reqId,
 			};
-			$
-					.ajax({
-						async : false,
-						type : "POST",
-						url : "/shipment/ship",
-						data : data,
-						timeout :7000,
-						success : function(
-								data) {
-							alert("Succesfully Shipped request: " + $(event.target).data("id"));
-							$(event.target).closest('tr').remove();		   							
-						},
-						error : function(
-								xhr,
-								textStatus,
-								errorThrown) {
-							alert(textStatus);
-						}
-					});
+			$.ajax({
+				async : false,
+				type : "POST",
+				url : "/shipment/ship",
+				data : data,
+				timeout : 7000,
+				success : function(data) {
+					alert("Succesfully Shipped request: "
+							+ $(event.target).data("id"));
+					$(event.target).closest('tr').remove();
+				},
+				error : function(xhr, textStatus, errorThrown) {
+					alert(textStatus);
+				}
+			});
 
 		}
-	return false;	
+		return false;
 	}
-	</script>
+</script>
 </head>
 
 <body>
@@ -50,6 +48,7 @@
 			<tr>
 				<td>ID:</td>
 				<td>Destination Address Line</td>
+				<td>Customer Full name</td>
 				<td></td>
 			</tr>
 		</thead>
@@ -57,9 +56,9 @@
 			<tr>
 				<td>${request.id}</td>
 				<td>${request.destination}</td>
-				<td>${request.id}</td>
+				<td>${request.fullNameOfCutomer}</td>
 				<td><button data-id="${request.id}"
-						onclick=" return ship(event,${request.id})" class="ship">Ship</button></td>
+						onclick=" return ship(event)" class="ship">Ship</button></td>
 			</tr>
 		</c:forEach>
 	</table>

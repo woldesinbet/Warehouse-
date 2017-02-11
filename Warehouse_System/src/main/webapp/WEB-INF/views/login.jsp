@@ -10,7 +10,8 @@
 <title>Login Page</title>
 </head>
 <body>
-<h1> Login Page</h1>
+<h1>Welcome To Warehouse Management System</h1>
+<h2> Login Page</h2>
 
 <form action="<c:url value="/login"></c:url>" method="post">
 	User: <input type="text"  name="username" id="username" />

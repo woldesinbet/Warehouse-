@@ -9,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
+import org.hibernate.annotations.NaturalId;
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
@@ -16,6 +17,8 @@ public class SKU {
 	@GeneratedValue
 	@Id
 	private long id;
+	@NaturalId
+	private Long productId;
 	private String name;
 	private BigDecimal price;
 	private String desribtion;
@@ -133,6 +136,14 @@ public class SKU {
 
 	public void setLocation(Location location) {
 		this.location = location;
+	}
+
+	public Long getProductId() {
+		return productId;
+	}
+
+	public void setProductId(Long productId) {
+		this.productId = productId;
 	}
 
 	public void setQuantitiy(int quantitiy) {

@@ -2,12 +2,14 @@ package com.lealem.service;
 
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.lealem.model.SKUCreationRequest;
 import com.lealem.repository.SKUCreationRequestRepository;
-
+@Transactional
 @Service
 public class SKUCreationRequestService {
 	@Autowired

@@ -2,11 +2,13 @@ package com.lealem.model;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
 @Entity
 public class ItemToBeShipped {
+	@GeneratedValue
 	@Id
 	private Long id;
 	private int quantity;
@@ -15,6 +17,15 @@ public class ItemToBeShipped {
 
 	@ManyToOne
 	private ShippingRequest shippingRequest;
+
+	ItemToBeShipped() {
+	}
+
+	public ItemToBeShipped(SKU sku, int quantity) {
+		super();
+		this.sku = sku;
+		this.quantity = quantity;
+	}
 
 	public int getQuantity() {
 		return quantity;
@@ -40,5 +51,8 @@ public class ItemToBeShipped {
 		this.shippingRequest = shippingRequest;
 	}
 
+	public Long getId() {
+		return id;
+	}
 
 }

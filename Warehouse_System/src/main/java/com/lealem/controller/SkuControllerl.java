@@ -62,6 +62,7 @@ public class SkuControllerl {
 		}
 		SKUCreationRequest req = this.creationRequest.findOne(id);
 		req.setCreated(true);
+		sku.setProductId(req.getProductId());
 		sku.setName(req.getName());
 		sku.setDesribtion(req.getDesribtion());
 		sku.setQuantitiy(req.getQuantitiy());

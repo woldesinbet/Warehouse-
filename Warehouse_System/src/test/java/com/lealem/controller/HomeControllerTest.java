@@ -1,14 +1,12 @@
-package com.lealem.api;
+package com.lealem.controller;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +26,7 @@ import org.springframework.web.context.WebApplicationContext;
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @AutoConfigureMockMvc
-public class SKURequestControllerTest {
+public class HomeControllerTest {
 	@Autowired
 	private WebApplicationContext webApplicationContext;
 
@@ -41,15 +39,7 @@ public class SKURequestControllerTest {
 
 	@Test
 	public void getHello() throws Exception {
-		mvc.perform(
-			post("/warehouse/skuCreationRequest").contentType(MediaType.APPLICATION_JSON)
-			.content("{"
-					+ "\"name\": \"profession\","
-					+ "\"quantitiy\": \"45\","
-					+ "\"price\": \"1234\","						
-					+ " \"desribtion\":\"related with my profession\"}")			
-				)
+		mvc.perform(get("/home"))
 		    .andExpect(status().isOk()).andDo(print());
 	}
-	
 }

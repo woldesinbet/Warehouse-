@@ -8,4 +8,6 @@ import com.lealem.model.SKU;
 
 public interface SKURepository extends CrudRepository<SKU, Long> {
 	List<SKU> findAll();
+
+	SKU findByProductId(Long productId);
 }

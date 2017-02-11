@@ -20,12 +20,24 @@ public class ShippingRequest {
 	@GeneratedValue
 	@Id
 	private Long id;
+	private String fullNameOfCutomer;
 	@OneToMany(mappedBy = "shippingRequest", cascade = CascadeType.ALL)
 	private List<ItemToBeShipped> items = new ArrayList<ItemToBeShipped>();
 	@Enumerated(EnumType.STRING)
 	private ShipmentStatus status;
 	@NotEmpty
 	private String destination;
+
+	ShippingRequest() {
+	}
+
+	public ShippingRequest(String fullNameOfCutomer, String destination) {
+		super();
+		this.fullNameOfCutomer = fullNameOfCutomer;
+		this.items = items;
+		this.destination = destination;
+		this.status = ShipmentStatus.NEW;
+	}
 
 	public Long getId() {
 		return id;
@@ -48,17 +60,17 @@ public class ShippingRequest {
 	}
 
 	public void ship() {
-		if(this.status == ShipmentStatus.NEW || this.status == ShipmentStatus.SHIPPED){
+		if (this.status == ShipmentStatus.NEW || this.status == ShipmentStatus.SHIPPED) {
 			throw new RuntimeException("Item is not ready to be shipped or already shipped.");
 		}
 		this.status = ShipmentStatus.SHIPPED;
 	}
 
 	public void pick() {
-		if(this.status == ShipmentStatus.SHIPPED || this.status == ShipmentStatus.PICKED){
+		if (this.status == ShipmentStatus.SHIPPED || this.status == ShipmentStatus.PICKED) {
 			throw new RuntimeException("Item is not ready to be shipped or already shipped.");
-		}		
-		for(ItemToBeShipped item: items){
+		}
+		for (ItemToBeShipped item : items) {
 			SKU sku = item.getSku();
 			sku.decreaseQuantitiy(item.getQuantity());
 		}
@@ -73,4 +85,16 @@ public class ShippingRequest {
 		this.destination = address;
 	}
 
+	public String getFullNameOfCutomer() {
+		return fullNameOfCutomer;
+	}
+
+	public void setFullNameOfCutomer(String fullNameOfCutomer) {
+		this.fullNameOfCutomer = fullNameOfCutomer;
+	}
+
+	public void addItem(ItemToBeShipped item) {
+		this.items.add(item);
+		item.setShippingRequest(this);
+	}
 }

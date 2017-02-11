@@ -11,6 +11,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
 @EnableWebSecurity
@@ -30,9 +31,9 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.authorizeRequests()
-		.antMatchers("/warehouse/skuCreationRequest").permitAll()			
-		.antMatchers("/css/**", "/js/**").permitAll()
-		.antMatchers("/").permitAll()
+				.antMatchers("/css/**", "/js/**").permitAll()
+				.antMatchers("/").permitAll()
+				.antMatchers("/warehouse/skuCreationRequest","/warehouse/shippingRequest").permitAll()			
 				.antMatchers("/login/addUser").permitAll()
 				.anyRequest()
 				.authenticated()
@@ -43,7 +44,8 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 				.antMatchers("/sku/SKUs/*","/sku/details").authenticated()				
 				.and().formLogin().loginPage("/login").usernameParameter("username").passwordParameter("password")
 				.defaultSuccessUrl("/home").permitAll().and().logout()
-				.permitAll().and().sessionManagement().invalidSessionUrl("/login")				
+				.permitAll().and().sessionManagement().invalidSessionUrl("/login")	.and()
+				.logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout")).logoutSuccessUrl("/login");								;
 				;
 		   http.csrf().disable();
 	}

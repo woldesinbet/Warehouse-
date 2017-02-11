@@ -8,6 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.validation.constraints.NotNull;
 
+import org.hibernate.annotations.NaturalId;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -17,6 +18,8 @@ public class SKUCreationRequest {
 	@GeneratedValue
 	@Id
 	private Long id;
+	@NaturalId
+	private Long productId;
 	@NotEmpty
 	private String name;
 	@NotNull
@@ -30,13 +33,13 @@ public class SKUCreationRequest {
 	SKUCreationRequest() {
 	}
 
-	public SKUCreationRequest(String name, BigDecimal price, String desribtion, int quantitiy) {
+	public SKUCreationRequest(Long productId, String name, BigDecimal price, String desribtion, int quantitiy) {
 		super();
+		this.productId = productId;
 		this.name = name;
 		this.price = price;
 		this.desribtion = desribtion;
 		this.quantitiy = quantitiy;
-		this.created = false;
 	}
 
 	public Long getId() {
@@ -81,6 +84,14 @@ public class SKUCreationRequest {
 
 	public void setCreated(boolean created) {
 		this.created = created;
+	}
+
+	public Long getProductId() {
+		return productId;
+	}
+
+	public void setProductId(Long productId) {
+		this.productId = productId;
 	}
 
 }
